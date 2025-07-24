@@ -239,19 +239,31 @@ def forgot_password():
 @app.route('/protocol', methods=['GET', 'POST'])
 @login_required
 def protocol():
+    if request.method == 'POST':
+        selected_protocol = request.form.get('protocol')
+        if selected_protocol not in PROTOCOLS:
+            flash("Invalid protocol selected.", "error")
+            return render_template('protocol.html', protocols=PROTOCOLS.keys())
+
+        # Optionally store in session
+        session['selected_protocol'] = selected_protocol
+
+        # Redirect to the next step
+        return redirect(url_for('amount'))
+
     return render_template('protocol.html', protocols=PROTOCOLS.keys())
 
 @app.route('/amount', methods=['GET', 'POST'])
 @login_required
 def amount():
+    selected_protocol = session.get('selected_protocol', None)
     if request.method == 'POST':
         amount_str = request.form.get('amount')
         currency = request.form.get('currency')
 
         if not currency or currency not in ['USD', 'EUR']:
             flash("Please select a valid currency.", "error")
-            return render_template('amount.html')
-
+             return render_template('amount.html', protocol=selected_protocol)
         try:
             amount_float = float(amount_str)
             if amount_float <= 0:
