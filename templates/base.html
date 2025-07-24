@@ -1,43 +1,28 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>BLACKROCK</title>
+    <title>Black ROCK Group</title>
     <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
     <meta name="theme-color" content="#1a237e">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <div class="container">
-        <h1>BLACKROCK</h1>
+        <h1>BLACK ROCK Group</h1>
 
-        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% with messages = get_flashed_messages() %}
           {% if messages %}
-            <div class="flash-messages">
-              {% for category, msg in messages %}
-                <p class="flash-{{ category }}">{{ msg }}</p>
+            <div class="flash">
+              {% for msg in messages %}
+                <p>{{ msg }}</p>
               {% endfor %}
             </div>
           {% endif %}
         {% endwith %}
-
-        <nav class="main-nav">
-            <ul>
-                {% if session.logged_in %}
-                <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
-                <li><a href="{{ url_for('protocol') }}">New Transaction</a></li>
-                <li><a href="{{ url_for('transactions_dashboard') }}">Transaction History</a></li>
-                <li><a href="{{ url_for('change_password') }}">Change Password</a></li>
-                <li><a href="{{ url_for('logout') }}" class="logout-btn">Logout</a></li>
-                {% else %}
-                <li><a href="{{ url_for('login') }}">Login</a></li>
-                {% endif %}
-            </ul>
-        </nav>
 
         {% block content %}{% endblock %}
     </div>
