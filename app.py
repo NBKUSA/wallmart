@@ -236,6 +236,11 @@ def forgot_password():
         return redirect(url_for('login'))
     return render_template('forgot_password.html')
 
+@app.route('/protocol', methods=['GET', 'POST'])
+@login_required
+def protocol():
+    return render_template('protocol.html', protocols=PROTOCOLS.keys())
+
 @app.route('/amount', methods=['GET', 'POST'])
 @login_required
 def amount():
@@ -255,58 +260,15 @@ def amount():
                 flash("Amount must be a positive number.", "error")
                 return render_template('amount.html', protocol=selected_protocol)
 
-            # Save to session or proceed...
             session['amount'] = amount_float
             session['currency'] = currency
-
-            return redirect(url_for('amount'))  # Replace with your actual route
+            return redirect(url_for('payout'))  # Replace this with your next route
 
         except ValueError:
             flash("Invalid amount format.", "error")
             return render_template('amount.html', protocol=selected_protocol)
 
     return render_template('amount.html', protocol=selected_protocol)
-
-@app.route('/amount', methods=['GET', 'POST'])
-@login_required
-def amount():
-    selected_protocol = session.get('selected_protocol', None)
-    if request.method == 'POST':
-        amount_str = request.form.get('amount')
-        currency = request.form.get('currency')
-
-        if not currency or currency not in ['USD', 'EUR']:
-            flash("Please select a valid currency.", "error")
-             return render_template('amount.html', protocol=selected_protocol)
-        try:
-            amount_float = float(amount_str)
-            if amount_float <= 0:
-                flash("Amount must be a positive number.", "error")
-                return render_template('amount.html')
-
-            # --- Daily Limit Check ---
-            current_date = date.today()
-            last_txn_date_str = session.get('last_transaction_date')
-
-            if last_txn_date_str and date.fromisoformat(last_txn_date_str) < current_date:
-                # Reset daily limit if it's a new day
-                session['daily_amount_spent'] = 0.0
-                session['last_transaction_date'] = current_date.isoformat()
-
-            current_spent = session.get('daily_amount_spent', 0.0)
-            if (current_spent + amount_float) > DAILY_LIMIT_PER_TERMINAL:
-                flash(f"Daily transaction limit of {DAILY_LIMIT_PER_TERMINAL:,.2f} {currency} exceeded for this terminal.", "error")
-                return render_template('amount.html')
-
-            session['amount'] = amount_str
-            session['currency'] = currency
-            session['daily_amount_spent'] = current_spent + amount_float # Update spent amount
-
-        except ValueError:
-            flash("Invalid amount. Please enter a number.", "error")
-            return render_template('amount.html')
-        return redirect(url_for('payout'))
-    return render_template('amount.html')
 
 @app.route('/payout', methods=['GET', 'POST'])
 @login_required
