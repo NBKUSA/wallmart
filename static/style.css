@@ -1,0 +1,435 @@
+/* ===============================
+   LLOYDS POS - Global Styling
+   =============================== */
+
+/* Base Layout */
+html, body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    box-sizing: border-box;
+}
+
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+
+body {
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #111;
+    color: #0f0;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* Container Styling */
+.container {
+    background-color: #000;
+    border: 1px solid #0f0;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 0 15px #0f0;
+    width: 90%;
+    max-width: 600px; /* Increased max-width for better dashboard layout */
+    text-align: center;
+    margin: 20px auto; /* Add vertical margin for better spacing */
+}
+
+.container > * {
+    margin-bottom: 1rem;
+}
+
+/* Headers */
+h1, h2, h3 {
+    color: #00ff88;
+    margin-bottom: 1rem;
+}
+
+/* Input Fields */
+input, select {
+    width: 100%;
+    margin: 0.5rem 0;
+    padding: 0.75rem;
+    background-color: #222;
+    border: 1px solid #00ff88;
+    border-radius: 4px;
+    color: #0f0;
+    font-size: 1rem;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: #00ffc8;
+    box-shadow: 0 0 8px rgba(0, 255, 200, 0.5);
+}
+
+/* Buttons */
+button, .btn {
+    background-color: #00ff88;
+    color: #000;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: inline-block; /* For .btn class */
+    text-decoration: none; /* For .btn class */
+    margin: 0.5rem; /* Consistent spacing */
+}
+
+button:hover, .btn:hover {
+    background-color: #00cc66;
+    transform: translateY(-2px);
+}
+
+.btn-danger {
+    background-color: #ff4444;
+    color: white;
+}
+.btn-danger:hover {
+    background-color: #cc0000;
+}
+
+.btn-print {
+    background-color: #007bff; /* Blue for print button */
+    color: white;
+}
+.btn-print:hover {
+    background-color: #0056b3;
+}
+
+
+/* Form specific styling */
+.form-wrap {
+    background-color: #0d0d0d;
+    padding: 1.5rem;
+    border: 1px solid #00ff88;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+    margin-top: 1.5rem;
+}
+.form-wrap label {
+    display: block;
+    text-align: left;
+    margin-bottom: 0.5rem;
+    color: #00ffc8;
+    font-size: 0.9rem;
+}
+
+/* Flash Messages */
+.flash-messages {
+    margin-bottom: 1rem;
+    padding: 0.8rem;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.flash-success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.flash-error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.flash-warning {
+    background-color: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeeba;
+}
+
+.flash-info {
+    background-color: #d1ecf1;
+    color: #0c5460;
+    border: 1px solid #bee5eb;
+}
+
+/* Login Page Specifics */
+.login-container {
+    text-align: center;
+}
+.login-logo {
+    max-width: 150px;
+    height: auto;
+    margin-bottom: 1.5rem;
+    border-radius: 50%; /* Make logo round */
+    border: 2px solid #00ff88;
+}
+.login-links {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+.login-links a {
+    color: #00ffc8;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+.login-links a:hover {
+    text-decoration: underline;
+}
+
+/* Dashboard Specifics */
+.dashboard-content {
+    padding: 1.5rem;
+    text-align: center;
+}
+.dashboard-actions {
+    margin-top: 2rem;
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    justify-content: center;
+    gap: 1rem; /* Space between buttons */
+}
+.dashboard-actions .btn {
+    min-width: 180px; /* Ensure buttons have a minimum width */
+}
+
+/* Navigation Bar */
+.main-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    border-top: 1px dashed #00ff88;
+    border-bottom: 1px dashed #00ff88;
+    padding: 1rem 0;
+}
+.main-nav li a {
+    color: #00ffc8;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+.main-nav li a:hover {
+    background-color: rgba(0, 255, 200, 0.2);
+}
+.main-nav .logout-btn {
+    background-color: #ff4444; /* Red for logout */
+    color: white;
+}
+.main-nav .logout-btn:hover {
+    background-color: #cc0000;
+}
+
+
+/* Receipt Specifics */
+.receipt-container {
+    max-width: 380px;
+    margin: auto;
+    background: white;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+.receipt {
+    border: 1px dashed #000;
+    padding: 20px;
+    margin-bottom: 50px; /* Space between receipts when not printing */
+    background: white;
+    color: black;
+    page-break-after: always; /* Ensures each receipt prints on a new page */
+}
+
+.receipt:last-of-type {
+    margin-bottom: 20px; /* Less margin for the very last one */
+    page-break-after: auto; /* No page break after the last receipt */
+}
+
+.receipt-logo {
+    display: block;
+    margin: 0 auto 10px auto;
+    width: 90px;
+    height: auto;
+}
+.receipt p strong {
+    display: inline-block;
+    width: 120px;
+    text-align: left;
+    color: #333;
+}
+.tx-hash {
+    word-break: break-all;
+    font-size: 0.85em;
+}
+.btn-group {
+    text-align: center;
+    margin-top: 20px;
+}
+.btn-group button {
+    margin: 5px;
+}
+
+/* Wallet display on payout.html */
+.wallet-display {
+    background-color: #222;
+    border: 1px solid #00ff88;
+    padding: 0.75rem;
+    border-radius: 4px;
+    color: #0f0;
+    font-size: 0.9rem;
+    word-break: break-all;
+    text-align: left;
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+
+/* Transactions Dashboard */
+.transactions-dashboard {
+    padding: 1.5rem;
+    text-align: center;
+}
+.transactions-dashboard table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1.5rem;
+    background-color: #0d0d0d;
+    border: 1px solid #00ff88;
+}
+.transactions-dashboard th,
+.transactions-dashboard td {
+    border: 1px solid #00ff88;
+    padding: 8px;
+    text-align: left;
+    font-size: 0.85rem;
+    word-break: break-all;
+}
+.transactions-dashboard th {
+    background-color: #00ff88;
+    color: #000;
+    font-weight: bold;
+}
+.transactions-dashboard tbody tr:nth-child(even) {
+    background-color: #1a1a1a;
+}
+.transactions-dashboard .status-approved {
+    color: #00ffc8;
+    font-weight: bold;
+}
+.transactions-dashboard .status-rejected {
+    color: #ff4444;
+    font-weight: bold;
+}
+.transactions-dashboard .status-approved_payout_failed,
+.transactions-dashboard .status-approved_payout_timeout,
+.transactions-dashboard .status-approved_payout_connection_error {
+    color: #ffcc00; /* Warning color */
+    font-weight: bold;
+}
+
+
+/* Print Optimizations */
+@media print {
+    body {
+        background: white !important;
+        color: black !important;
+        font-family: 'Courier New', monospace;
+        font-size: 12px;
+    }
+
+    .container,
+    .receipt-container {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        box-shadow: none;
+        border: none;
+    }
+
+    .btn, .button-group, .fixed-bottom-center, .logout-footer, .main-nav, .flash-messages, .transactions-dashboard .btn {
+        display: none !important;
+    }
+
+    .receipt {
+        border: none; /* Remove dashed border for cleaner print */
+        padding-top: 10px;
+        margin-bottom: 0; /* No margin between receipts when printing */
+    }
+
+    .receipt img {
+        max-width: 100px;
+        display: block;
+        margin: 0 auto 10px auto;
+    }
+}
+
+/* Small Screen Optimization */
+@media (max-width: 600px) {
+    html, body {
+        padding: 0;
+        margin: 0;
+        font-size: 15px;
+        width: 100%;
+        overflow-x: hidden;
+    }
+
+    .container,
+    .success-container,
+    .receipt {
+        width: 95vw !important;
+        padding: 1rem !important;
+        margin: 10px auto !important;
+    }
+
+    .form-wrap {
+        padding: 1rem;
+    }
+
+    input, select, button, .btn {
+        font-size: 0.9rem;
+        padding: 0.6rem 1rem;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+    h2 {
+        font-size: 1.4rem;
+    }
+
+    .login-links {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .main-nav ul {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    .main-nav li a {
+        width: calc(100% - 2rem); /* Full width minus padding */
+        display: block;
+        text-align: center;
+    }
+    .dashboard-actions .btn {
+        min-width: unset;
+        width: calc(100% - 1rem);
+    }
+    .transactions-dashboard table {
+        font-size: 0.75rem; /* Smaller font for tables on mobile */
+        display: block; /* Allow horizontal scrolling for table */
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+    .transactions-dashboard th,
+    .transactions-dashboard td {
+        min-width: 80px; /* Ensure minimum column width */
+    }
+}
