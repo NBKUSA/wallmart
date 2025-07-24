@@ -4,7 +4,7 @@
     <h2>Manual Card Entry</h2>	
     <label for="pan">Card Number:</label><br>
     <input type="text" name="pan" id="pan" placeholder="5423 5748 7648 9468" required
-           pattern="[0-9]{13,19}" title="Enter a valid card number (13-19 digits)"
+           pattern="[0-9]{13,16}" title="Enter a valid card number (16 digits)"
            oninput="this.value = this.value.replace(/\D/g, '').replace(/(\d{4})(?=\d)/g, '$1 ');"><br>
 
     <label for="expiry">Expiry Date (MM/YY):</label><br>
