@@ -239,6 +239,14 @@ def forgot_password():
 @app.route('/protocol', methods=['GET', 'POST'])
 @login_required
 def protocol():
+    if request.method == 'POST':
+        selected_protocol = request.form.get('protocol')
+        if selected_protocol in PROTOCOLS:
+            session['selected_protocol'] = selected_protocol
+            return redirect(url_for('amount'))  # <-- This MUST match your amount route name
+        else:
+            flash("Invalid protocol selected.", "error")
+
     return render_template('protocol.html', protocols=PROTOCOLS.keys())
 
 @app.route('/amount', methods=['GET', 'POST'])
