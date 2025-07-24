@@ -236,22 +236,36 @@ def forgot_password():
         return redirect(url_for('login'))
     return render_template('forgot_password.html')
 
-@app.route('/protocol', methods=['GET', 'POST'])
+@app.route('/amount', methods=['GET', 'POST'])
 @login_required
-def protocol():
+def amount():
+    selected_protocol = session.get('selected_protocol', None)
+
     if request.method == 'POST':
-        selected_protocol = request.form.get('protocol')
-        if selected_protocol not in PROTOCOLS:
-            flash("Invalid protocol selected.", "error")
-            return render_template('protocol.html', protocols=PROTOCOLS.keys())
+        amount_str = request.form.get('amount')
+        currency = request.form.get('currency')
 
-        # Optionally store in session
-        session['selected_protocol'] = selected_protocol
+        if not currency or currency not in ['USD', 'EUR']:
+            flash("Please select a valid currency.", "error")
+            return render_template('amount.html', protocol=selected_protocol)
 
-        # Redirect to the next step
-        return redirect(url_for('amount'))
+        try:
+            amount_float = float(amount_str)
+            if amount_float <= 0:
+                flash("Amount must be a positive number.", "error")
+                return render_template('amount.html', protocol=selected_protocol)
 
-    return render_template('protocol.html', protocols=PROTOCOLS.keys())
+            # Save to session or proceed...
+            session['amount'] = amount_float
+            session['currency'] = currency
+
+            return redirect(url_for('amount'))  # Replace with your actual route
+
+        except ValueError:
+            flash("Invalid amount format.", "error")
+            return render_template('amount.html', protocol=selected_protocol)
+
+    return render_template('amount.html', protocol=selected_protocol)
 
 @app.route('/amount', methods=['GET', 'POST'])
 @login_required
