@@ -1,10 +1,10 @@
-from iso8583.iso8583 import ISO8583
+from iso8583.iso8583 import iso8583
 from iso8583.specs import default_ascii as spec
 from datetime import datetime
 import random
 
 def generate_iso8583_request(pan, expiry, cvv, amount, txn_type="00"):
-    iso = ISO8583(spec=spec)
+    iso = iso8583.ISO8583(spec)
     iso.set_mtI("0200")  # Financial transaction request
     iso.set_bit(2, pan)
     iso.set_bit(3, "000000")
