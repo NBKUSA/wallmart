@@ -1,5 +1,3 @@
-
-
 from flask import Flask, render_template, request, redirect, session, url_for, send_file, flash
 import random, logging, qrcode, io, os, json, hashlib, re
 from datetime import datetime
