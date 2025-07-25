@@ -12,13 +12,13 @@ app.secret_key = 'rutland_secret_key_8583'
 logging.basicConfig(level=logging.INFO)
 
 # Configuration
-USERNAME = "rutlandadmin"
+USERNAME = "blackrockadmin"
 PASSWORD_FILE = "password.json"
 
 # Ensure password file exists
 if not os.path.exists(PASSWORD_FILE):
     with open(PASSWORD_FILE, "w") as f:
-        hashed = hashlib.sha256("admin123".encode()).hexdigest()
+        hashed = hashlib.sha256("Br_3339".encode()).hexdigest()
         json.dump({"password": hashed}, f)
 
 def check_password(raw):
