@@ -2,14 +2,14 @@
 
 services:
   - type: web
-    name: card-terminal-ui
+    name: Blackrock-Terminal
     env: python
     plan: free
     buildCommand: pip install -r requirements.txt
     startCommand: python app.py
     envVars:
       - key: FLASK_SECRET_KEY
-        value: your_ui_secret
+        value: BLACKROCK_secret
       - key: ISO_SERVER_URL
         value: https://iso8583-server.onrender.com/process_payment
 
