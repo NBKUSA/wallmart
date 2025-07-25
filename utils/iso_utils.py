@@ -1,5 +1,5 @@
-from pyiso8583.iso8583 import ISO8583
-from pyiso8583.specs import default_ascii as spec
+from iso8583.iso8583 import ISO8583
+from iso8583.specs import default_ascii as spec
 from datetime import datetime
 import random
 
