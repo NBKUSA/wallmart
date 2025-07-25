@@ -1,7 +1,7 @@
 Flask==2.3.3
 requests==2.31.0
-iso8583==3.11.9
+iso8583==2.2.3
 web3==6.11.1
 tronpy==0.6.1
-gunicorn==22.0.0 # Added for production WSGI server
+gunicorn==22.0.0
 qrcode
