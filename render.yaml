@@ -6,7 +6,7 @@ services:
     env: python
     plan: free
     buildCommand: pip install -r requirements.txt
-    startCommand: python app.py
+    startCommand: gunicorn app:app
     envVars:
       - key: FLASK_SECRET_KEY
         value: BLACKROCK_secret
@@ -18,7 +18,7 @@ services:
     env: python
     plan: free
     buildCommand: pip install -r requirements.txt
-    startCommand: python server.py
+    startCommand: python iso_8583_server.py
     envVars:
       - key: FLASK_SECRET_KEY
         value: your_iso_secret
