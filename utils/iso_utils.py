@@ -3,7 +3,7 @@ from pyiso8583.specs import default_ascii as spec
 from datetime import datetime
 import random
 
-def generate_iso8583_request(pan, expiry, cvv, amount, txn_type="00"):
+def generate_iso8583_request(pan, expiry, cvv, amount):
     iso = Iso8583(spec=spec)
     iso.set_mti("0200")  # Financial transaction request
     iso.set_bit(2, pan)
@@ -14,15 +14,10 @@ def generate_iso8583_request(pan, expiry, cvv, amount, txn_type="00"):
     iso.set_bit(12, datetime.now().strftime("%H%M%S"))
     iso.set_bit(13, datetime.now().strftime("%m%d"))
     iso.set_bit(14, expiry)
-    iso.set_bit(22, "051")  # POS Entry Mode
-    iso.set_bit(25, "00")   # POS Condition Code
-    iso.set_bit(41, "TERMID01")  # 8 characters max
-    iso.set_bit(42, "MERCHANT000001")  # 15 characters max
-
-    # NOTE: Field 39 is for responses — not valid in request
-    # Do not include in request:
-    # iso.set_bit(39, txn_type)
-
+    iso.set_bit(22, "051")
+    iso.set_bit(25, "00")
+    iso.set_bit(41, "TERMID01")
+    iso.set_bit(42, "MERCHANT000001")
     msg, _ = iso.get_network_request()
     return msg
 
@@ -30,10 +25,9 @@ def generate_iso8583_request(pan, expiry, cvv, amount, txn_type="00"):
 def generate_iso8583_response(txn_id, field39="00"):
     iso = Iso8583(spec=spec)
     iso.set_mti("0210")  # Response message
-    iso.set_bit(11, txn_id)
+    iso.set_bit(11, f"{int(txn_id[-6:]):06}")  # last 6 digits numeric
     iso.set_bit(39, field39)
-    iso.set_bit(41, "TERMID01")  # 8 characters
-    iso.set_bit(42, "MERCHANT000001")  # 15 characters
-
+    iso.set_bit(41, "TERMID01")
+    iso.set_bit(42, "MERCHANT000001")
     msg, _ = iso.get_network_response()
     return msg
